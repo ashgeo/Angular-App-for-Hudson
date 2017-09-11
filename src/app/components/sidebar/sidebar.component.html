@@ -1,0 +1,76 @@
+<div class="area" [hidden]="isActive()">
+    <nav class="side-bar">
+        <ul>            
+            <li>               
+                <a routerLink="/dashboard" *ngIf="authService.isLogedIn()">
+                        <i class="fa fa-home fa-2x col-md-4"></i>
+                        <span class="nav-text">
+                            Dashboard
+                        </span>                      
+                    </a>
+
+            </li>
+            <li class="has-subnav">
+                <a>
+                        <i class="fa fa-group fa-2x col-md-4"></i>
+                        <span class="nav-button" routerLink="/employee" routerLinkActive="active-link">
+                          Employee
+                        </span>
+                    </a>
+            </li>
+            <li class="has-subnav">
+                <a>
+                        <i class="fa fa-money fa-2x col-md-4"></i>
+                        <span class="nav-text" routerLink="/sales" routerLinkActive="active-link">
+                          Sales
+                        </span>
+                    </a>
+            </li>
+            <li class="has-subnav">
+                <a>
+                      <i class="fa fa-exchange fa-2x col-md-4"></i>
+                        <span class="nav-text" routerLink="/supplier" routerLinkActive="active-link">
+                        Supplier
+                        </span>
+                    </a>
+
+            </li>
+            <li class="has-subnav">
+                <a>
+                       <i class="fa fa-folder-open fa-2x col-md-4"></i>
+                        <span class="nav-text" routerLink="/wages" routerLinkActive="active-link">
+                        Salary
+                        </span>
+                    </a>
+
+            </li>
+            <li>
+                <a>
+                        <i class="fa fa-bar-chart-o fa-2x col-md-4"></i>
+                       <span class="nav-text" routerLink="/salesexpense" routerLinkActive="active-link">
+                            Sales and Expense
+                        </span>
+                    </a>
+            </li>
+            <li>
+                <a>
+                       <i class="fa fa-table fa-2x col-md-4"></i>
+                        <span class="nav-text" >
+                            User Account
+                        </span>
+                    </a>
+            </li>
+        </ul>
+
+        <ul class="logout">
+            <li>
+                <a href="#">
+                         <i class="fa fa-power-off fa-2x col-md-4"></i>
+                        <span class="nav-text">
+                            Logout
+                        </span>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+</div>

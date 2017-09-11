@@ -1,0 +1,170 @@
+<!-- <div class="container">
+  <div class="row">
+    <p></p>
+    <p></p>
+    <p></p>
+    <p> </p>
+    <p> </p>
+    <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default panel-table">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col col-xs-6">
+              <h3 class="panel-title">Supplier Details</h3>
+            </div>
+            <div class="col col-xs-6 text-right">
+              <button type="button" class="btn btn-sm btn-primary btn-create">Create New</button>
+            </div>
+          </div>
+        </div>
+ <div [innerHTML]="employee | json"></div>
+<h1>{{ employee | json }}</h1>
+        <div class="panel-body">
+
+          <table class="table table-striped table-bordered table-list">
+            <thead>
+              <tr>
+                <th><em class="fa fa-cog"></em></th>
+                <th class="hidden-xs">Supplier ID</th>
+                <th>Supplier Name</th>
+                <th>Date </th>
+                <th>Total Amount</th>
+                <th>Amount Paid</th>
+                <th>Amount Due</th>
+                
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let supplier of suppliers">
+                <td align="center">
+                  <a class="btn btn-default btn-sm"><em class="fa fa-pencil" aria-hidden="true"></em></a>
+                  <a class="btn btn-danger btn-sm"><em class="fa fa-trash-o" aria-hidden="true"></em></a>
+                </td>
+                <td>{{supplier.SupplierDetailsID}}</td>
+                <td>{{supplier.SupplierName}}</td>
+                <td>{{supplier.Date}}</td>
+                <td>{{supplier.TotalAmount}}</td>
+                <td>{{supplier.AmountPaid}}</td>
+                <td>{{supplier.AmountDue}}</td>
+                
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col col-xs-4">Page 1 of 5
+            </div>
+            <div class="col col-xs-8">
+              <ul class="pagination hidden-xs pull-right">
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+              </ul>
+              <ul class="pagination visible-xs pull-right">
+                <li><a href="#">«</a></li>
+                <li><a href="#">»</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div> -->
+
+<div class="container">
+  <div class='panel panel-primary'>
+    <div class='panel-heading'>
+      Supplier Management
+    </div>
+    <div class='panel-body'>
+      <div class='table-responsive'>
+        <div style="padding-bottom:10px"><button class="btn btn-success" (click)="addSupplierRecord()">Add</button></div>
+        <div class="alert alert-info" role="alert" *ngIf="indLoading"><img src="../../assets/images/loading.gif" width="32" height="32" /> Loading...</div>
+        <div *ngIf='supplier && suppliers.length==0' class="alert alert-info" role="alert">No record found!</div>
+        <table class='table table-striped' *ngIf='suppliers && suppliers.length'>
+          <thead>
+            <tr>          
+             <th class="hidden-xs">Supplier ID</th>
+             <th>Date </th>
+             <th>Supplier Name</th>             
+             <th>Total Amount</th>
+             <th>Amount Paid</th>
+             <th>Amount Due</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let supplier of suppliers">
+              <td>{{supplier.SupplierDetailsID}}</td>
+              <td>{{supplier.Date}}</td>
+              <td>{{supplier.SupplierName}}</td>             
+              <td>{{supplier.TotalAmount}}</td>
+              <td>{{supplier.AmountPaid}}</td>
+              <td>{{supplier.AmountDue}}</td>
+                <td> 
+                <button title="Edit" class="btn btn-primary" (click)="editSupplierRecord(supplier.SupplierDetailsID)">Edit</button>
+                <button title="Delete" class="btn btn-danger" (click)="deleteSupplierRecord(supplier.SupplierDetailsID)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+        </div>
+      </div>
+      <div class="col-sm-8 col-sm-offset-2">
+        <alert></alert>
+      </div>
+    </div>
+  </div>
+</div>
+
+<modal #modal>
+  <form novalidate (ngSubmit)="onSubmit(supplierForm)" [formGroup]="supplierForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">{{modalTitle}}</h4>
+    </modal-header>
+    <modal-body>
+      <div class="form-group">
+        <div>
+          <span>Supplier ID*</span>
+          <input type="text" class="form-control" placeholder="Supplier ID" formControlName="SupplierDetailsID">
+        </div>
+        <div>
+           <span>Supplier Paid Date*</span>
+            <ng2-datepicker [options]="options" [(ngModel)]="Date" formControlName="Date" class="form-control"></ng2-datepicker>          
+        </div>         
+   <div>
+          <span>Supplier Name*</span>
+          <input type="text" class="form-control" placeholder="Supplier Name" formControlName="SupplierName">
+        </div>     
+        <div>
+          <span>Total Amount*</span>
+          <input type="text" class="form-control" placeholder="Total Amount" formControlName="TotalAmount">
+        </div>
+         <div>
+          <span>Amount Paid*</span>
+          <input type="text" class="form-control"  placeholder="Amount Paid" formControlName="AmountPaid">
+        </div>     
+        <div>
+          <span>Amount Due*</span>
+          <input type="text" class="form-control" placeholder="AmountDue" formControlName="AmountDue">
+        </div>
+      </div>  
+    </modal-body>
+    <modal-footer>
+      <div>
+        <a class="btn btn-default" (click)="modal.dismiss()">Cancel</a>
+        <button type="submit" [disabled]="supplierForm.invalid" class="btn btn-primary">{{modalBtnTitle}}</button>
+      </div>
+      <div class="col-sm-8 col-sm-offset-2">
+        <alert></alert>
+      </div>
+    </modal-footer>
+  </form>
+</modal>

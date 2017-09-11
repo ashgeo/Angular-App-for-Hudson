@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="row">
+        <p></p>
+        <p></p>
+        <p></p>
+        <p> </p>
+        <p> </p>
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default panel-table">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col col-xs-6">
+                            <h3 class="panel-title">Sales Expense Balance</h3>
+                        </div>
+                        <div class="col col-xs-6 text-right">
+                            <button type="button" class="btn btn-sm btn-primary btn-create">Create New</button>
+                        </div>
+                    </div>
+                </div>
+                <div [innerHTML]="employee | json"></div>
+                <h1>{{ employee | json }}</h1>
+                <div class="panel-body">
+
+                    <table class="table table-striped table-bordered table-list">
+                        <thead>
+                            <tr>
+                                <th><em class="fa fa-cog"></em></th>
+                                <th class="hidden-xs">SalesExpense ID</th>
+                                <th>Date</th>
+                                <th>FTPOS Amount</th>
+                                <th>Supplier Paid</th>
+                                <th>Emp Amount Paid</th>
+                                <th>Cash Left</th>
+                                <th>Total Expence</th>
+                                <th>Till Sale</th>
+                                <th>Cash From Previous Sale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let salesexpense of salesexpenses">
+                                <td align="center">
+                                    <a class="btn btn-default btn-sm"><em class="fa fa-pencil" aria-hidden="true"></em></a>
+                                    <a class="btn btn-danger btn-sm"><em class="fa fa-trash-o" aria-hidden="true"></em></a>
+                                </td>
+                                <td>{{salesexpense.SalesExpenseID}}</td>
+                                <td>{{salesexpense.Date}}</td>
+                                <td>{{salesexpense.TotalFTPOSAmount}}</td>
+                                <td>{{salesexpense.SupplierAmountPaid}}</td>
+                                <td>{{salesexpense.EmployeeAmountPaid}}</td>
+                                <td>{{salesexpense.CashLeftToday}}</td>
+                                <td>{{salesexpense.TotalExpence}}</td>
+                                <td>{{salesexpense.TotalTillSale}}</td>
+                                <td>{{salesexpense.CashTakenFromPreviousSale}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col col-xs-4">Page 1 of 5
+                        </div>
+                        <div class="col col-xs-8">
+                            <ul class="pagination hidden-xs pull-right">
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                            </ul>
+                            <ul class="pagination visible-xs pull-right">
+                                <li><a href="#">«</a></li>
+                                <li><a href="#">»</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+<div class="container">
+  <div class='panel panel-primary'>
+    <div class='panel-heading'>
+      Employee Management
+    </div>
+    <div class='panel-body'>
+      <div class='table-responsive'>
+        <div style="padding-bottom:10px"><button class="btn btn-success" (click)="addEmployeeRecord()">Add</button></div>
+        <div class="alert alert-info" role="alert" *ngIf="indLoading"><img src="../../assets/images/loading.gif" width="32" height="32" /> Loading...</div>
+        <div *ngIf='employee && employees.length==0' class="alert alert-info" role="alert">No record found!</div>
+        <table class='table table-striped' *ngIf='employees && employees.length'>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>First Name</th>
+              <th>Last Name </th>
+              <th>Role</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th><em class="fa fa-cog"></em></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let employee of employees">
+              <td>{{employee.EmpID}}</td>
+              <td>{{employee.FirstName}}</td>
+              <td>{{employee.LastName}}</td>
+              <td>{{employee.EmpRole}}</td>
+              <td>{{employee.Phone}}</td>
+              <td>{{employee.Email}}</td>
+              <td>
+                <button title="Edit" class="btn btn-primary" (click)="editEmployeeRecord(employee.EmpID)">Edit</button>
+                <button title="Delete" class="btn btn-danger" (click)="deleteEmployeeRecord(employee.EmpID)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+        </div>
+      </div>
+      <div class="col-sm-8 col-sm-offset-2">
+        <alert></alert>
+      </div>
+    </div>
+  </div>
+</div>
+<modal #modal>
+  <form novalidate (ngSubmit)="onSubmit(userFrm)" [formGroup]="userFrm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">{{modalTitle}}</h4>
+    </modal-header>
+    <modal-body>
+      <div class="form-group">
+        <div>
+          <span>Emp ID*</span>
+          <input type="text" class="form-control" placeholder="Employee ID" formControlName="EmpID">
+        </div>
+        <div>
+          <span>First Name*</span>
+          <input type="text" class="form-control" placeholder="First Name" formControlName="FirstName">
+        </div>
+        <div>
+          <span>Last Name*</span>
+          <input type="text" class="form-control" placeholder="Last Name" formControlName="LastName">
+        </div>
+        <div>
+          <span>Employee Role*</span>
+          <select formControlName="EmpRole" class="form-control">
+           <option value="undefined" disabled selected hidden>Select Role</option>
+           <option value="null" disabled selected hidden>Select Role</option>
+           <option *ngFor="let role of empRoles" value="role.RoleID">{{role.RoleName}}</option>
+          </select>
+        </div>
+        <div>
+          <span>Phone*</span>
+          <input type="text" class="form-control" placeholder="Phone" formControlName="Phone">
+        </div>
+        <div>
+          <span>Email*</span>
+          <input type="text" class="form-control" placeholder="Email" formControlName="Email">
+        </div>
+        <div>
+          <span>User Name*</span>
+          <input type="text" class="form-control" placeholder="User Name" formControlName="UserName">
+        </div>
+      </div>
+      <div>
+        <span>Password*</span>
+        <input type="password" class="form-control" placeholder="Password" formControlName="Password">
+      </div>
+      <div>
+        <span>Confirm Password*</span>
+        <input type="password" class="form-control" placeholder="Confirm Password" formControlName="ConfirmPassword">
+      </div>
+    </modal-body>
+    <modal-footer>
+      <div>
+        <a class="btn btn-default" (click)="modal.dismiss()">Cancel</a>
+        <button type="submit" [disabled]="userFrm.invalid" class="btn btn-primary">{{modalBtnTitle}}</button>
+      </div>
+      <div class="col-sm-8 col-sm-offset-2">
+        <alert></alert>
+      </div>
+    </modal-footer>
+  </form>
+</modal>

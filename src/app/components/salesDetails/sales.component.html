@@ -1,0 +1,173 @@
+<!-- <div class="container">
+  <div class="row">
+    <p></p>
+    <p></p>
+    <p></p>
+    <p> </p>
+    <p> </p>
+    <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default panel-table">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col col-xs-6">
+              <h3 class="panel-title">Sales Details</h3>
+            </div>
+            <div class="col col-xs-6 text-right">
+              <button type="button" class="btn btn-sm btn-primary btn-create">Create New</button>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+
+          <table class="table table-striped table-bordered table-list">
+            <thead>
+              <tr>
+                <th><em class="fa fa-cog"></em></th>
+                <th class="hidden-xs">Sale ID</th>
+                <th>Date</th>
+                <th>Ftpos Amount</th>
+                <th>Cash Amount</th>
+                <th>Blue Box Amount</th>
+                <th>Cash Left</th>
+                <th>TotalSale</th>
+                          </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sale of sales">
+                <td align="center">
+                  <a class="btn btn-default btn-sm"><em class="fa fa-pencil" aria-hidden="true"></em></a>
+                  <a class="btn btn-danger btn-sm"><em class="fa fa-trash-o" aria-hidden="true"></em></a>
+                </td>
+                <td>{{sale.SaleID}}</td>
+                <td>{{sale.Date}}</td>
+                <td>{{sale.FtposAmount}}</td>
+                <td>{{sale.CashAmount}}</td>
+                <td>{{sale.BlueBoxAmount}}</td>
+                <td>{{sale.CashLeft}}</td>
+                <td>{{sale.TotalSale}}</td>              
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col col-xs-4">Page 1 of 5
+            </div>
+            <div class="col col-xs-8">
+              <ul class="pagination hidden-xs pull-right">
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+              </ul>
+              <ul class="pagination visible-xs pull-right">
+                <li><a href="#">«</a></li>
+                <li><a href="#">»</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div> -->
+
+<div class="container">
+  <div class='panel panel-primary'>
+    <div class='panel-heading'>
+      Sales Management
+    </div>
+    <div class='panel-body'>
+      <div class='table-responsive'>
+        <div style="padding-bottom:10px"><button class="btn btn-success" (click)="addSaleRecord()">Add</button></div>
+        <div class="alert alert-info" role="alert" *ngIf="indLoading"><img src="../../assets/images/loading.gif" width="32" height="32" /> Loading...</div>
+        <div *ngIf='sale && sales.length==0' class="alert alert-info" role="alert">No record found!</div>
+        <table class='table table-striped' *ngIf='sales && sales.length'>
+          <thead>
+            <tr>
+             <th class="hidden-xs">Sale ID</th>
+                <th>Date</th>
+                <th>Ftpos Amount</th>
+                <th>Cash Amount</th>
+                <th>Blue Box Amount</th>
+                <th>Cash Left</th>
+                <th>TotalSale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sale of sales">
+              <td>{{sale.SaleID}}</td>
+                <td>{{sale.Date}}</td>
+                <td>{{sale.FtposAmount}}</td>
+                <td>{{sale.CashAmount}}</td>
+                <td>{{sale.BlueBoxAmount}}</td>
+                <td>{{sale.CashLeft}}</td>
+                <td>{{sale.TotalSale}}</td> 
+                <td> 
+                <button title="Edit" class="btn btn-primary" (click)="editEmployeeRecord(sale.SaleID)">Edit</button>
+                <button title="Delete" class="btn btn-danger" (click)="deleteEmployeeRecord(sale.SaleID)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+        </div>
+      </div>
+      <div class="col-sm-8 col-sm-offset-2">
+        <alert></alert>
+      </div>
+    </div>
+  </div>
+</div>
+
+<modal #modal>
+  <form novalidate (ngSubmit)="onSubmit(salesForm)" [formGroup]="salesForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">{{modalTitle}}</h4>
+    </modal-header>
+    <modal-body>
+      <div class="form-group">
+        <div>
+          <span>Sale ID*</span>
+          <input type="text" class="form-control" placeholder="Sale ID" formControlName="SaleID">
+        </div>
+        <div>
+           <span>Sale Date*</span>
+            <ng2-datepicker [options]="options" [(ngModel)]="Date" formControlName="Date" class="form-control"></ng2-datepicker>          
+        </div>         
+   <div>
+          <span>Ftpos Amount*</span>
+          <input type="text" class="form-control" placeholder="Ftpos Amount" formControlName="FtposAmount">
+        </div>     
+        <div>
+          <span>Cash Amount*</span>
+          <input type="text" class="form-control" placeholder="Cash Amount" formControlName="CashAmount">
+        </div>
+         <div>
+          <span>Blue Box Amount*</span>
+          <input type="text" class="form-control"  placeholder="200" formControlName="BlueBoxAmount">
+        </div>
+        <div>
+          <span>Cash Left*</span>
+          <input type="text" class="form-control" placeholder="Cash Left" formControlName="CashLeft">
+        </div>
+        <div>
+          <span>Total Sale*</span>
+          <input type="text" class="form-control" placeholder="Total Sale" formControlName="TotalSale">
+        </div>
+      </div>  
+    </modal-body>
+    <modal-footer>
+      <div>
+        <a class="btn btn-default" (click)="modal.dismiss()">Cancel</a>
+        <button type="submit" [disabled]="salesForm.invalid" class="btn btn-primary">{{modalBtnTitle}}</button>
+      </div>
+      <div class="col-sm-8 col-sm-offset-2">
+        <alert></alert>
+      </div>
+    </modal-footer>
+  </form>
+</modal>

@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="row">
+        <p></p>
+        <p></p>
+        <p></p>
+        <p> </p>
+        <p> </p>
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default panel-table">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col col-xs-6">
+                            <h3 class="panel-title">Employee Details</h3>
+                        </div>
+                        <div class="col col-xs-6 text-right">
+                            <button type="button" class="btn btn-sm btn-primary btn-create">Create New</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                    <table class="table table-striped table-bordered table-list">
+                        <thead>
+                            <tr>
+                                <th><em class="fa fa-cog"></em></th>
+                                <th class="hidden-xs">Pay ID</th>
+                                <th>Emp ID</th>
+                                <th>Employee Name</th>                                 
+                                <th>Pay Date</th>
+                                <th>Start Time</th>
+                                <th>Finish Time</th>
+                                <th>Total Hours</th>
+                                <th>Total Amount</th>
+                                <th>Pay Due</th>
+                                <th>IsPaid</th>
+                               
+
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let wage of wages">
+                                <td align="center">
+                                    <a class="btn btn-default btn-sm"><em class="fa fa-pencil" aria-hidden="true"></em></a>
+                                    <a class="btn btn-danger btn-sm"><em class="fa fa-trash-o" aria-hidden="true"></em></a>
+                                </td>
+                                <td>{{wage.PayID}}</td>
+                                <td>{{wage.EmpID}}</td>
+                                <td>{{wage.EmpName}}</td>                        
+                                <td>{{wage.PayDate}}</td>
+                                <td>{{wage.StartTime}}</td>
+                                <td>{{wage.FinishTime}}</td>
+                                <td>{{wage.TotalHours}}</td>
+                                <td>{{wage.TotalAmount}}</td>
+                                <td>{{wage.PayDue}}</td>
+                                <td>{{wage.IsPaid}}</td>
+                                
+                               
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col col-xs-4">Page 1 of 5
+                        </div>
+                        <div class="col col-xs-8">
+                            <ul class="pagination hidden-xs pull-right">
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                            </ul>
+                            <ul class="pagination visible-xs pull-right">
+                                <li><a href="#">«</a></li>
+                                <li><a href="#">»</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
