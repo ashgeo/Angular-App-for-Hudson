@@ -2,7 +2,7 @@ export class Shared {
    // public static BASE_USER_ENDPOINT = 'http://clipper-api.mavericktechlabs.com.au';
 
    //Base URL
-   public static BASE_URL_ENDPOINT= 'http://localhost:60776';
+   public static BASE_URL_ENDPOINT= '..........';
      
    // User Name
    public static URL_EXTENSION_USERNAME_CHECK = '/api/useraccount/validate-username';
